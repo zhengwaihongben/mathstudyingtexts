@@ -1,0 +1,16 @@
+\usepackage{}
+
+Packages:
+- amsmath
+- amssymb
+- amsthm
+- mathtools
+- geometry 
+- fancyhdr : customizing footers
+- enumitem : customizing lists precisely
+- footmisc : footnotes
+- graphicx : inserting external pictures
+- tikz : drawing graphs
+- pgfplots : an advanced version of tikz
+- ctex : for Chinese
+- hyperref : hyperlinks

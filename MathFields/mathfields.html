@@ -6,45 +6,10 @@
 
     <title>Fields of Mathematics</title>
     <script src="../katex-config.js"></script>
+    <link rel="stylesheet" href="../CSS/MainStyle.css">
     <style>
-        /* 重置最外層的計數器 */
-        body {
-            counter-reset: h2counter;
-        }
-        
-        /* 第一層級：H2 */
-        h2 {
-            counter-reset: h3counter;
-            counter-increment: h2counter;
-        }
-        h2::before {
-            content: counter(h2counter) " ";
-        }
-        
-        /* 第二層級：H3 */
-        h3 {
-            counter-reset: h4counter;
-            counter-increment: h3counter;
-        }
-        h3::before {
-            content: counter(h2counter) "." counter(h3counter) " ";
-        }
-        
-        /* 第三層級：H4 */
-        h4 {
-            counter-reset: h5counter;
-            counter-increment: h4counter;
-        }
-        h4::before {
-            content: counter(h2counter) "." counter(h3counter) "." counter(h4counter) " ";
-        }
-        
-        /* 第四層級：H5 */
-        h5 {
-            counter-increment: h5counter;
-        }
-        h5::before {
-            content: counter(h2counter) "." counter(h3counter) "." counter(h4counter) "." counter(h5counter) " ";
+        p {
+            text-align: center;
         }
     </style>
 
@@ -58,8 +23,6 @@
         This page provides an overview of the fields of mathematics for study, but it is not completely exhaustive. Some of the more advanced fields of mathematics are, in fact, hard to fit neatly into one broad category.
     </p>
 
-    <a href="../index.html">Home Page</a> <br>
-    <a href="../MathFields/mathfields.html">Core Subfields of Math</a>
 
 
     <hr>
@@ -180,8 +143,16 @@
     <h3>Extremal Combinatorics</h3>
     <h3>Combinatorial Design Theory</h3>
 
-    <a href="index.html">Home Page</a> <br>
-    <a href="MathFields/mathfields.html">Core Subfields of Math</a>
+    <footer class="footer-index">
+        <hr>
+
+        <div class="index-title">Index</div>
+
+        <div class="index-list">
+            <a href="index.html">Home Page</a>
+            <a href="MathFields/mathfields.html">Core Subfields of Math</a>
+        </div>
+    </footer>
 
 </body>
 

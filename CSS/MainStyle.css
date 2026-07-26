@@ -1,0 +1,346 @@
+/* ==========================================
+   1. CSS 變數 (Light & Dark Mode)
+   ========================================== */
+:root {
+    /* 亮色模式 */
+    --bg-color: #ffffff;
+    --text-color: #1e1e2f;
+    --heading-color: #0a0a14;
+    --border-color: #e2e8f0;
+    --link-color: #2563eb;
+    --link-hover: #1d4ed8;
+    --code-bg: #f1f5f9;
+    --hr-color: #e2e8f0;
+    
+    /* 字體 */
+    --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-heading: "Georgia", "Times New Roman", serif;
+    
+    /* 排版間距 */
+    --max-width: 680px;
+    --line-height: 1.8;
+}
+
+/* 暗色模式 (自動跟隨系統) */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #12121a;
+        --text-color: #e2e8f0;
+        --heading-color: #f8fafc;
+        --border-color: #2d3748;
+        --link-color: #60a5fa;
+        --link-hover: #93bbfc;
+        --code-bg: #1e293b;
+        --hr-color: #2d3748;
+        
+        /* 暗色模式下縮窄容器，讓閱讀更專注 */
+        --max-width: 580px;
+    }
+}
+
+/* ==========================================
+   2. 全域重置與基礎樣式
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    line-height: var(--line-height);
+    padding: 40px clamp(16px, 6vw, 80px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* 主要內容容器：限制寬度，置中 */
+.container {
+    max-width: var(--max-width);
+    width: 90%;
+}
+
+/* ==========================================
+   3. 連結樣式
+   ========================================== */
+a {
+    color: var(--link-color);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+}
+a:hover {
+    border-bottom-color: var(--link-color);
+}
+
+/* ==========================================
+   4. 標題 (無縮排, 自動編號 H2 ~ H5)
+   ========================================== */
+body {
+    counter-reset: h2counter;
+}
+
+/* 第一層級 H2 */
+h2 {
+    counter-reset: h3counter;
+    counter-increment: h2counter;
+    font-family: var(--font-heading);
+    color: var(--heading-color);
+    font-size: 1.8rem;
+    margin: 2rem 0 0.8rem 0;
+    padding-top: 0.5rem;
+    border-top: 2px solid var(--border-color);
+}
+h2::before {
+    content: counter(h2counter) ". ";
+}
+
+/* 第二層級 H3 */
+h3 {
+    counter-reset: h4counter;
+    counter-increment: h3counter;
+    font-family: var(--font-heading);
+    color: var(--heading-color);
+    font-size: 1.4rem;
+    margin: 1.5rem 0 0.6rem 0;
+}
+h3::before {
+    content: counter(h2counter) "." counter(h3counter) " ";
+}
+
+/* 第三層級 H4 */
+h4 {
+    counter-reset: h5counter;
+    counter-increment: h4counter;
+    font-family: var(--font-heading);
+    color: var(--heading-color);
+    font-size: 1.15rem;
+    margin: 1.2rem 0 0.4rem 0;
+}
+h4::before {
+    content: counter(h2counter) "." counter(h3counter) "." counter(h4counter) " ";
+}
+
+/* 第四層級 H5 */
+h5 {
+    counter-increment: h5counter;
+    font-family: var(--font-heading);
+    color: var(--heading-color);
+    font-size: 1rem;
+    margin: 1rem 0 0.2rem 0;
+    font-weight: 600;
+}
+h5::before {
+    content: counter(h2counter) "." counter(h3counter) "." counter(h4counter) "." counter(h5counter) " ";
+}
+
+/* ==========================================
+   5. 段落與文字 (優化中英文混排兩端對齊)
+   ========================================== */
+p {
+    margin: 0 0 1.2rem 0;
+    /* 1. 強制兩端對齊，消除左右凹凸 */
+    text-align: justify;
+    /* 2. 針對中英文混合的最佳化（表意文字與單字間距平衡） */
+    text-justify: inter-ideograph;
+    /* 3. 允許英文長單字在行尾斷字（如 "mathematics" 可切成 "mathe-matics"） */
+    hyphens: auto;
+    /* 4. 防止過長的連續字串（如超長網址）將版面撐破 */
+    overflow-wrap: break-word;
+}
+
+/* 引言或定理框 (同步繼承兩端對齊) */
+blockquote {
+    border-left: 4px solid var(--link-color);
+    background-color: var(--code-bg);
+    padding: 0.8rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 6px 6px 0;
+    font-style: italic;
+    /* 加上這行，讓引言框內的文字也兩端對齊 */
+    text-align: justify;
+    text-justify: inter-ideograph;
+    hyphens: auto;
+}
+
+/* ==========================================
+   6. 圖片控制 (自動適應大小並置中)
+   ========================================== */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1.5rem auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    background-color: var(--bg-color);
+}
+
+/* 如果是暗色模式，稍微調整圖片陰影 */
+@media (prefers-color-scheme: dark) {
+    img {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+}
+
+/* 圖片說明（放在圖片下方的小字） */
+figcaption {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-top: -0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* ==========================================
+   7. 數學公式容器 (處理過長的公式)
+   ========================================== */
+/* 這是給 KaTeX 或 MathJax 產生的區塊用的 */
+.math-display {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0.5rem 0;
+    margin: 1.2rem 0;
+    text-align: center;
+    font-size: 1.1rem; /* 稍微放大獨立公式 */
+}
+
+/* 行內公式修正 */
+.math-inline {
+    font-size: 1em;
+}
+
+/* ==========================================
+   8. 水平分隔線
+   ========================================== */
+hr {
+    border: none;
+    height: 1px;
+    background: var(--border-color);
+    margin: 2.5rem 0;
+}
+
+/* ==========================================
+   9. 程式碼 (如果你有寫程式範例)
+   ========================================== */
+code {
+    background-color: var(--code-bg);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-family: "JetBrains Mono", "Fira Code", monospace;
+    font-size: 0.9em;
+}
+pre {
+    background-color: var(--code-bg);
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1rem 0;
+}
+pre code {
+    background: none;
+    padding: 0;
+    font-size: 0.9rem;
+}
+
+/* ==========================================
+   10. 行動裝置優化
+   ========================================== */
+@media (min-width: 1024px) {
+    body {
+        padding: 80px clamp(80px, 20vw, 300px);
+    }
+    /* 電腦版字體放大，更有氣勢 */
+    h2 { font-size: 2rem; }    /* 比 1.8rem 大 */
+    h3 { font-size: 1.6rem; }  /* 比 1.4rem 大 */
+    h4 { font-size: 1.2rem; }  /* 比 1.15rem 大 */
+    h5 { font-size: 1.05rem; } /* 略大於 1rem */
+}
+
+/* ==========================================
+   11. 頁尾索引 (簡潔置中版)
+   ========================================== */
+
+.footer-index {
+    margin-top: 4rem;          /* 與正文保持距離 */
+    text-align: center;
+}
+
+/* ---- 分隔線 ---- */
+.footer-index hr {
+    margin-bottom: 2rem;
+}
+
+/* ---- "Index" 標題 ---- */
+.index-title {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;         /* 適當地放大 */
+    font-weight: 700;          /* 粗體 */
+    letter-spacing: 0.08em;    /* 字距稍微拉開，更有「索引」的儀式感 */
+    color: var(--heading-color);
+    margin-bottom: 1.8rem;
+    
+    /* 強制取消任何可能繼承的自動編號（避免出現 "1. Index"） */
+    counter-reset: none;
+}
+.index-title::before,
+.index-title::after {
+    content: none !important;
+}
+
+/* ---- 連結清單 ---- */
+.index-list {
+    display: flex;
+    flex-direction: column;    /* 垂直排列，像書本索引 */
+    align-items: center;       /* 全部置中 */
+    gap: 0.9rem;              /* 連結之間的間距 */
+}
+
+/* ---- 每個連結的樣式 ---- */
+.index-list a {
+    font-size: 1rem;
+    color: var(--text-color);  /* 平常跟內文同色，更低調 */
+    text-decoration: none;
+    border-bottom: 1.5px solid transparent;
+    padding: 0.1rem 0.3rem;
+    transition: color 0.25s, border-color 0.25s, padding-left 0.25s;
+    opacity: 0.85;
+}
+
+/* 滑鼠懸停效果：變藍、底線出現、微微右移 */
+.index-list a:hover {
+    color: var(--link-color);
+    border-bottom-color: var(--link-color);
+    padding-left: 0.8rem;      /* 向右滑入，增加互動回饋感 */
+    opacity: 1;
+}
+
+/* ---- 手機版微調 ---- */
+@media (max-width: 600px) {
+    .footer-index {
+        margin-top: 2.5rem;
+    }
+    
+    .index-title {
+        font-size: 1.2rem;
+        margin-bottom: 1.2rem;
+    }
+    
+    .index-list {
+        gap: 0.7rem;           /* 手機上間距稍微縮小，節省空間 */
+    }
+    
+    .index-list a {
+        font-size: 1rem;
+        padding: 0.3rem 0;     /* 增加觸控區域，方便手指點擊 */
+    }
+    
+    /* 手機上取消滑入效果，避免誤觸感 */
+    .index-list a:hover {
+        padding-left: 0;
+    }
+}

@@ -1,0 +1,16 @@
+The comman commands in Latex.
+
+Mathematical Symbols
+Complex Numbers: \newcommand{\CC}{\mathbb{C}}
+Real Numbers: \newcommand{\RR}{\mathbb{R}}
+Rational Numbers: \newcommand{\QQ}{\mathbb{Q}}
+Integers: \newcommand{\ZZ}{\mathbb{Z}}
+National Numbers: \newcommand{\NN}{\mathbb{N}}
+
+Serial Numbers:
+\newtheorem{Theorem}[Theorem]{subsection}
+\newtheorem{Theorem}[Lemma]{subsection}
+\newtheorem{Theorem}[Corollary]{subsection}
+\newtheorem{Theorem}[Proposition]{subsection}
+
+\newtheorem{Definition}[Definition]{subsection}
