@@ -19,6 +19,8 @@
     /* 排版間距 */
     --max-width: 680px;
     --line-height: 1.8;
+
+    --header-bg: rgba(253, 253, 245, 0.9);
 }
 
 /* 暗色模式 (自動跟隨系統) */
@@ -67,14 +69,39 @@ body {
 /* ==========================================
    3. 連結樣式
    ========================================== */
+/* ==========================================
+   3. 連結樣式 (改為 style.css 風格)
+   ========================================== */
 a {
     color: var(--link-color);
     text-decoration: none;
     border-bottom: 1px solid transparent;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s ease;
 }
 a:hover {
     border-bottom-color: var(--link-color);
+}
+
+/* --- 導覽列連結專屬樣式 (對應 style.css 的 .page-links) --- */
+.page-links {
+    display: flex;
+    flex-wrap: wrap;      
+    gap: 16px 24px;       
+    justify-content: center;
+    margin: 32px 0;
+}
+
+.page-links a {
+    color: var(--link-color);       
+    text-decoration: none;        
+    border-bottom: 2px solid transparent; 
+    transition: border-color 0.2s ease, color 0.2s ease;
+    font-weight: bold;            /* 加粗 */
+}
+
+.page-links a:hover {
+    color: var(--link-hover);     /* 深紅 */
+    border-bottom-color: var(--link-hover);
 }
 
 /* ==========================================
@@ -343,4 +370,54 @@ pre code {
     .index-list a:hover {
         padding-left: 0;
     }
+}
+
+/* ==========================================
+   4. Header 樣式 (優化版)
+   ========================================== */
+.site-header {
+    /* 背景設為深藍色，與正文區分 */
+    background-color: #000546; 
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 2px solid var(--border-color);
+}
+
+/* 讓 Header 內的容器寬度與正文一致 */
+.site-header .container {
+    max-width: var(--max-width); /* 沿用正文的寬度變數 (如 680px) */
+    width: 90%;
+    margin: 0 auto;              /* 居中 */
+    display: flex;
+    justify-content: center;     /* 連結居中 */
+    align-items: center;
+    /* 縮小高度：原本靠 margin 撐開，現在改用固定的 padding */
+    padding: 10px 0;             
+}
+
+/* ==========================================
+   導覽連結樣式
+   ========================================== */
+.page-links {
+    display: flex;
+    flex-wrap: wrap;      
+    gap: 12px 24px;       
+    justify-content: center;
+    margin: 0; 
+}
+
+.page-links a {
+    color: #e2e8f0;               /* 淺灰白，在深藍底上清晰可見 */
+    text-decoration: none;        
+    border-bottom: 2px solid transparent; 
+    transition: all 0.2s ease;
+    font-weight: 500;             /* 稍微加粗 */
+    font-size: 0.95rem;           /* 稍微縮小字體 */
+}
+
+.page-links a:hover {
+    color: #e8b84b;               /* hover 顯示金色 */
+    border-bottom-color: #e8b84b; /* 金色底線 */
 }
